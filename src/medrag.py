@@ -24,9 +24,9 @@ openai.api_key = openai.api_key or os.getenv('OPENAI_API_KEY') or config["api_ke
 if openai.__version__.startswith("0"):
     openai.api_base = openai.api_base or os.getenv("OPENAI_API_BASE") or config.get("api_base")
     if openai.api_type == "azure":
-        openai_client = lambda **x: openai.ChatCompletion.create(**{'engine' if k == 'model' else k: v for k, v in x.items()})["choices"][0]["message"]["content"]
+        openai_client = lambda **x: openai.chat.completions.create(**{'engine' if k == 'model' else k: v for k, v in x.items()})["choices"][0]["message"]["content"]
     else:
-        openai_client = lambda **x: openai.ChatCompletion.create(**x)["choices"][0]["message"]["content"]
+        openai_client = lambda **x: openai.chat.completions.create(**x)["choices"][0]["message"]["content"]
 else:
     if openai.api_type == "azure":
         openai.azure_endpoint = openai.azure_endpoint or os.getenv("OPENAI_ENDPOINT") or config.get("azure_endpoint")
