@@ -7,4 +7,4 @@ transformers
 sentence_transformers
 tiktoken
 datasets
-pyserini==0.22.1
+pyserini
